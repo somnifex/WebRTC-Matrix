@@ -2,14 +2,6 @@
 
 [English Documentation](./README.md)
 
-> 跨浏览器 WebRTC 隐私增强管理扩展。
-
-...
-
-## 开源协议
-
-GPL-3.0
-
 **WebRTC Matrix** 是一款专门用于通过精细化策略管理 WebRTC 权限的浏览器扩展。与市面上仅提供全局开关的拦截工具不同，WebRTC Matrix 提供了基于域名的黑白名单管理、全局兜底策略，并支持通过 WebDAV 协议进行多端同步，全方位保护您的 IP 隐私。
 
 ## 核心功能
@@ -70,4 +62,5 @@ GPL-3.0
 - **语言**: [TypeScript](https://www.typescriptlang.org/)
 - **存储**: Chrome Storage API
 
-
+## 开源协议
+GPL-3.0
