@@ -1,0 +1,70 @@
+{
+  "../../../../@crx/manifest": {
+    "file": "assets/crx-manifest.js-B83mv8-v.js",
+    "name": "crx-manifest.js",
+    "src": "../../../../@crx/manifest",
+    "isEntry": true
+  },
+  "__plugin-vue_export-helper-KKkw3Lli.js": {
+    "file": "assets/_plugin-vue_export-helper-KKkw3Lli.js",
+    "name": "_plugin-vue_export-helper"
+  },
+  "_match-C4wd3_Kx.js": {
+    "file": "assets/match-C4wd3_Kx.js",
+    "name": "match"
+  },
+  "_storage-BF9_fGL3.js": {
+    "file": "assets/storage-BF9_fGL3.js",
+    "name": "storage"
+  },
+  "index.ts-loader.js": {
+    "file": "assets/index.ts-loader-BSsq8ort.js",
+    "src": "index.ts-loader.js"
+  },
+  "src/background/index.ts": {
+    "file": "assets/index.ts-Keqrn9_k.js",
+    "name": "index.ts",
+    "src": "src/background/index.ts",
+    "isEntry": true,
+    "imports": [
+      "_storage-BF9_fGL3.js"
+    ]
+  },
+  "src/content/index.ts": {
+    "file": "assets/index.ts-NUyobQFu.js",
+    "name": "index.ts",
+    "src": "src/content/index.ts",
+    "isEntry": true,
+    "imports": [
+      "_storage-BF9_fGL3.js",
+      "_match-C4wd3_Kx.js"
+    ]
+  },
+  "src/options/index.html": {
+    "file": "assets/index.html-DLZXlEOd.js",
+    "name": "index.html",
+    "src": "src/options/index.html",
+    "isEntry": true,
+    "imports": [
+      "__plugin-vue_export-helper-KKkw3Lli.js",
+      "_storage-BF9_fGL3.js"
+    ],
+    "css": [
+      "assets/index-BMpSVtK3.css"
+    ]
+  },
+  "src/popup/index.html": {
+    "file": "assets/index.html-CXzXpw0S.js",
+    "name": "index.html",
+    "src": "src/popup/index.html",
+    "isEntry": true,
+    "imports": [
+      "__plugin-vue_export-helper-KKkw3Lli.js",
+      "_storage-BF9_fGL3.js",
+      "_match-C4wd3_Kx.js"
+    ],
+    "css": [
+      "assets/index-BQ9i4Jlb.css"
+    ]
+  }
+}
