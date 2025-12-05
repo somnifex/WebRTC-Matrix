@@ -2,14 +2,6 @@
 
 [中文文档](./README_ZH.md)
 
-> A cross-browser privacy extension for fine-grained WebRTC control.
-
-...
-
-## License
-
-GPL-3.0
-
 **WebRTC Matrix** allows you to manage WebRTC permissions on a per-domain basis. Unlike standard extensions that offer a simple global on/off switch, WebRTC Matrix provides a tiered protection system with domain-specific rules, a global fallback policy, and WebDAV synchronization to keep your privacy settings consistent across devices.
 
 ## Features
@@ -70,4 +62,5 @@ Right-click the extension icon and select "Options", or click "Dashboard" in the
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **State**: Chrome Storage API
 
-
+## License
+GPL-3.0
