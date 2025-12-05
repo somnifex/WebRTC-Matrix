@@ -7,6 +7,7 @@ import { matchRule } from '../utils/match';
 const currentDomain = ref('');
 const isBlocked = ref(false);
 const isLoading = ref(true);
+const error = ref('');
 const settings = ref<Settings | null>(null);
 
 // Get current tab domain
@@ -24,59 +25,67 @@ const getCurrentTab = async () => {
 // Check status
 const checkStatus = async () => {
   isLoading.value = true;
-  const domain = await getCurrentTab();
-  if (!domain) {
-    currentDomain.value = 'Unknown / Restricted';
+  error.value = '';
+  try {
+    const domain = await getCurrentTab();
+    if (!domain) {
+      currentDomain.value = 'Unknown / Restricted';
+      isLoading.value = false;
+      return;
+    }
+    
+    currentDomain.value = domain;
+    
+    settings.value = await StorageManager.getSettings();
+    const rules = await StorageManager.getRules();
+    
+    const action = matchRule(domain, rules);
+    
+    if (action) {
+      isBlocked.value = action === 'block';
+    } else {
+      isBlocked.value = settings.value.defaultRule === 'block';
+    }
+  } catch (e) {
+    console.error('Failed to check status:', e);
+    error.value = 'Failed to load status.';
+  } finally {
     isLoading.value = false;
-    return;
   }
-  
-  currentDomain.value = domain;
-  
-  settings.value = await StorageManager.getSettings();
-  const rules = await StorageManager.getRules();
-  
-  const action = matchRule(domain, rules);
-  
-  if (action) {
-    isBlocked.value = action === 'block';
-  } else {
-    isBlocked.value = settings.value.defaultRule === 'block';
-  }
-  
-  isLoading.value = false;
 };
 
 // Toggle Rule
 const toggleBlock = async () => {
   if (!currentDomain.value || currentDomain.value.includes(' ')) return;
   
-  const newState = !isBlocked.value;
-  isBlocked.value = newState;
-  
-  // Save rule
-  // Remove existing rule for this exact domain to avoid duplicates?
-  // Or just append a new one?
-  // Ideally, find if there is an exact match rule and update it, or create new.
-  
-  const rules = await StorageManager.getRules();
-  const existingIndex = rules.findIndex(r => r.domain === currentDomain.value);
-  
-  const newAction = newState ? 'block' : 'allow';
-  
-  if (existingIndex >= 0) {
-    rules[existingIndex].action = newAction;
-    rules[existingIndex].timestamp = Date.now();
-  } else {
-    rules.push({
-      id: crypto.randomUUID(),
-      domain: currentDomain.value,
-      action: newAction,
-      timestamp: Date.now()
-    });
+  try {
+    const newState = !isBlocked.value;
+    isBlocked.value = newState;
+    
+    const rules = await StorageManager.getRules();
+    const existingIndex = rules.findIndex(r => r.domain === currentDomain.value);
+    
+    const newAction = newState ? 'block' : 'allow';
+    
+    if (existingIndex >= 0) {
+      rules[existingIndex].action = newAction;
+      rules[existingIndex].timestamp = Date.now();
+    } else {
+      rules.push({
+        id: crypto.randomUUID(),
+        domain: currentDomain.value,
+        action: newAction,
+        timestamp: Date.now()
+      });
+    }
+    
+    await StorageManager.setRules(rules);
+  } catch (e) {
+    console.error('Failed to toggle rule:', e);
+    error.value = 'Failed to save rule.';
+    // Revert state on error?
+    isBlocked.value = !isBlocked.value;
   }
-  
-  await StorageManager.setRules(rules);
 };
 
 const openOptions = () => {
@@ -125,6 +134,10 @@ const statusText = computed(() => isBlocked.value ? 'BLOCKED' : 'ALLOWED');
     
     <div v-else>
       <p>Loading...</p>
+    </div>
+
+    <div v-if="error" class="error-banner">
+      {{ error }}
     </div>
 
     <div class="footer">
@@ -226,5 +239,16 @@ button:hover {
 
 button.secondary {
   color: #aaa;
+}
+
+.error-banner {
+  background: #5a1d1d;
+  color: #ff4d4f;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
 }
 </style>

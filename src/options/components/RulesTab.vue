@@ -6,6 +6,8 @@ const rules = ref<Rule[]>([]);
 const searchTerm = ref('');
 const newDomain = ref('');
 const newAction = ref<'allow' | 'block'>('block');
+const isLoading = ref(false);
+const errorMessage = ref('');
 
 onMounted(async () => {
   rules.value = await StorageManager.getRules();
@@ -18,23 +20,43 @@ const filteredRules = computed(() => {
 
 const addRule = async () => {
   if (!newDomain.value) return;
+  isLoading.value = true;
+  errorMessage.value = '';
   
-  // Check duplicate
-  const exists = rules.value.find(r => r.domain === newDomain.value);
-  if (exists) {
-    exists.action = newAction.value;
-    exists.timestamp = Date.now();
-  } else {
-    rules.value.push({
-      id: crypto.randomUUID(),
-      domain: newDomain.value,
-      action: newAction.value,
-      timestamp: Date.now()
-    });
+  try {
+    // Check duplicate
+    const exists = rules.value.find(r => r.domain === newDomain.value);
+    if (exists) {
+      exists.action = newAction.value;
+      exists.timestamp = Date.now();
+    } else {
+      // Fallback for ID generation
+      // This handles environments where crypto.randomUUID() might not be available
+      // (e.g., non-secure contexts, though extensions are usually secure).
+      let id;
+      try {
+          id = crypto.randomUUID();
+      } catch (e) {
+          id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+      }
+
+      rules.value.push({
+        id,
+        domain: newDomain.value,
+        action: newAction.value,
+        timestamp: Date.now()
+      });
+    }
+    
+    await StorageManager.setRules(rules.value);
+    newDomain.value = '';
+  } catch (error: any) {
+    console.error('Failed to add rule:', error);
+    // Display the specific error message to help with debugging
+    errorMessage.value = `Failed to save rule: ${error.message || error}`;
+  } finally {
+    isLoading.value = false;
   }
-  
-  await StorageManager.setRules(rules.value);
-  newDomain.value = '';
 };
 
 const removeRule = async (id: string) => {
@@ -50,13 +72,16 @@ const removeRule = async (id: string) => {
       <input v-model="searchTerm" placeholder="Search domains..." class="search-input">
       
       <div class="add-box">
-        <input v-model="newDomain" placeholder="example.com or *.example.com" @keyup.enter="addRule">
-        <select v-model="newAction">
+        <input v-model="newDomain" placeholder="example.com or *.example.com" @keyup.enter="addRule" :disabled="isLoading">
+        <select v-model="newAction" :disabled="isLoading">
           <option value="allow">Allow</option>
           <option value="block">Block</option>
         </select>
-        <button @click="addRule">Add Rule</button>
+        <button @click="addRule" :disabled="isLoading">
+          {{ isLoading ? 'Adding...' : 'Add Rule' }}
+        </button>
       </div>
+      <div v-if="errorMessage" class="error-msg">{{ errorMessage }}</div>
     </div>
 
     <div class="rules-list">
@@ -185,5 +210,16 @@ button:hover {
   padding: 20px;
   text-align: center;
   color: #666;
+}
+
+.error-msg {
+  color: #ff4d4f;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>

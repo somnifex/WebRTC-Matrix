@@ -70,8 +70,10 @@ export class StorageManager {
     static async setSettings(settings: Partial<Settings>): Promise<void> {
         const current = await this.getSettings();
         const newSettings = { ...current, ...settings };
+        // Clean data (remove Vue proxies)
+        const cleanSettings = JSON.parse(JSON.stringify(newSettings)) as Settings;
         await browser.storage.local.set({
-            settings: newSettings,
+            settings: cleanSettings,
             meta: { ...await this.getMeta(), lastModified: Date.now() }
         });
     }
@@ -82,8 +84,10 @@ export class StorageManager {
     }
 
     static async setRules(rules: Rule[]): Promise<void> {
+        // Clean data (remove Vue proxies)
+        const cleanRules = JSON.parse(JSON.stringify(rules)) as Rule[];
         await browser.storage.local.set({
-            rules,
+            rules: cleanRules,
             meta: { ...await this.getMeta(), lastModified: Date.now() }
         });
     }
