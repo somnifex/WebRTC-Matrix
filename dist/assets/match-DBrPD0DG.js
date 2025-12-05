@@ -1,0 +1,1 @@
+function o(n,e){if(!e)return!1;if(e==="*"||e===n)return!0;const r=i=>i.replace(/([.+^=!:${}()|\[\]\/\\])/g,"\\$1"),t=`^${e.split("*").map(r).join(".*").replace(/\?/g,".")}$`;return new RegExp(t,"i").test(n)}function c(n,e){if(!e||!Array.isArray(e))return null;for(const r of e)if(!(!r||!r.domain)&&o(n,r.domain))return r.action;return null}export{c as m};

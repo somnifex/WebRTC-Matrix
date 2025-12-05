@@ -6,6 +6,7 @@
  * - Exact match
  */
 export function matchesDomain(domain: string, pattern: string): boolean {
+    if (!pattern) return false;
     if (pattern === '*') return true;
     if (pattern === domain) return true;
 
@@ -29,13 +30,10 @@ export function matchesDomain(domain: string, pattern: string): boolean {
  * Here we check specific rules.
  */
 export function matchRule(domain: string, rules: { domain: string, action: 'allow' | 'block' }[]): 'allow' | 'block' | null {
-    // We'll iterate through rules. If multiple match, which one wins?
-    // Usually the MOST SPECIFIC one, or the user ordered list.
-    // Let's assume the rules list is ordered by priority (top to bottom) or we find the first match.
-    // For MVP, let's find the FIRST match? OR all matches?
-    // Let's assume rules are evaluated in order.
+    if (!rules || !Array.isArray(rules)) return null;
 
     for (const rule of rules) {
+        if (!rule || !rule.domain) continue;
         if (matchesDomain(domain, rule.domain)) {
             return rule.action;
         }

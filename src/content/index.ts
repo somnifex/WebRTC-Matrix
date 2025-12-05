@@ -34,6 +34,10 @@ async function performCheck() {
     }
 }
 
+/**
+ * Injects the script that overrides window.RTCPeerConnection and navigator.mediaDevices.getUserMedia.
+ * This runs in the MAIN world (page context) to effectively intercept API calls.
+ */
 function injectBlocker() {
     const script = document.createElement('script');
     script.textContent = injectionCode;

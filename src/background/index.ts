@@ -21,6 +21,10 @@ async function checkActiveTab() {
     }
 }
 
+/**
+ * Extension Installation/Update Handler.
+ * Initializes storage with default values and starts the blocker/listeners.
+ */
 browser.runtime.onInstalled.addListener(async () => {
     console.log('WebRTC Matrix: Extension installed/updated.');
     await StorageManager.init();

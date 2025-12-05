@@ -80,7 +80,10 @@ export class StorageManager {
 
     static async getRules(): Promise<Rule[]> {
         const { rules } = await browser.storage.local.get('rules');
-        return rules || [];
+        const list = rules || [];
+        // Filter out malformed rules to prevent runtime errors
+        // @ts-ignore
+        return list.filter(r => r && typeof r.domain === 'string' && (r.action === 'allow' || r.action === 'block'));
     }
 
     static async setRules(rules: Rule[]): Promise<void> {

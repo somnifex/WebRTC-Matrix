@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { StorageManager, AppState } from '../../utils/storage';
 import { WebDAVClient, WebDAVConfig } from '../../utils/webdav';
-import { browser } from 'webextension-polyfill';
+import browser from 'webextension-polyfill';
 
 const config = ref<WebDAVConfig>({
   url: '',
@@ -123,7 +123,6 @@ const downloadConfig = async () => {
     
     // Simple Merge Strategy: Overwrite if remote is valid
     // Or check timestamps?
-    const currentMeta = await StorageManager.getMeta();
     
     // If we want a smart merge (Last Write Wins)
     /*

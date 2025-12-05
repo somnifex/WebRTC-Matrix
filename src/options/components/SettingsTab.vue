@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { StorageManager, Settings, GlobalPolicy, RuleAction } from '../../utils/storage';
-import { PrivacyBlocker } from '../../background/blocker'; // We can't import background code directly in some bundlers if it has node deps, but here it's shared code structure. Wait, `blocker.ts` imports `browser`.
+import { StorageManager, Settings } from '../../utils/storage';
 // Note: importing from 'background' might be risky if it executes code. PrivacyBlocker.init() is side-effecty.
 // Better to just update storage, and let background listen to storage changes. Background logic should NOT be imported here.
 

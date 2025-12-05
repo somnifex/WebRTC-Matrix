@@ -15,6 +15,10 @@ export class WebDAVClient {
         this.config = config;
     }
 
+    /**
+     * Generates the Basic Auth header from stored credentials.
+     * Note: In a production environment, consider more secure storage than cleartext in local/session storage.
+     */
     private getAuthHeader(): string {
         if (this.config.username && this.config.password) {
             return 'Basic ' + btoa(`${this.config.username}:${this.config.password}`);

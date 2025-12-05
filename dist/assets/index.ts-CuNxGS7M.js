@@ -1,4 +1,4 @@
-import{S as n}from"./storage-DyKUafBE.js";import{m as a}from"./match-C4wd3_Kx.js";const c=`
+import{S as n}from"./storage-BhOQnXRe.js";import{m as a}from"./match-DBrPD0DG.js";const c=`
 (function() {
   const blockWebRTC = () => {
     console.log('[WebRTC Matrix] WebRTC blocked by policy.');

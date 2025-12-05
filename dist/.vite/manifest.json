@@ -9,63 +9,63 @@
     "file": "assets/_plugin-vue_export-helper-KKkw3Lli.js",
     "name": "_plugin-vue_export-helper"
   },
-  "_match-C4wd3_Kx.js": {
-    "file": "assets/match-C4wd3_Kx.js",
+  "_match-DBrPD0DG.js": {
+    "file": "assets/match-DBrPD0DG.js",
     "name": "match"
   },
-  "_storage-DyKUafBE.js": {
-    "file": "assets/storage-DyKUafBE.js",
+  "_storage-BhOQnXRe.js": {
+    "file": "assets/storage-BhOQnXRe.js",
     "name": "storage"
   },
   "index.ts-loader.js": {
-    "file": "assets/index.ts-loader-U5wYLJIs.js",
+    "file": "assets/index.ts-loader-B1Ot_Ir2.js",
     "src": "index.ts-loader.js"
   },
   "src/background/index.ts": {
-    "file": "assets/index.ts-ClqZpmi_.js",
+    "file": "assets/index.ts-lbDydtr7.js",
     "name": "index.ts",
     "src": "src/background/index.ts",
     "isEntry": true,
     "imports": [
-      "_storage-DyKUafBE.js",
-      "_match-C4wd3_Kx.js"
+      "_storage-BhOQnXRe.js",
+      "_match-DBrPD0DG.js"
     ]
   },
   "src/content/index.ts": {
-    "file": "assets/index.ts-CUDRHKkz.js",
+    "file": "assets/index.ts-CuNxGS7M.js",
     "name": "index.ts",
     "src": "src/content/index.ts",
     "isEntry": true,
     "imports": [
-      "_storage-DyKUafBE.js",
-      "_match-C4wd3_Kx.js"
+      "_storage-BhOQnXRe.js",
+      "_match-DBrPD0DG.js"
     ]
   },
   "src/options/index.html": {
-    "file": "assets/index.html-8981dADd.js",
+    "file": "assets/index.html-DL0Udn6O.js",
     "name": "index.html",
     "src": "src/options/index.html",
     "isEntry": true,
     "imports": [
       "__plugin-vue_export-helper-KKkw3Lli.js",
-      "_storage-DyKUafBE.js"
+      "_storage-BhOQnXRe.js"
     ],
     "css": [
-      "assets/index-heUvg-6F.css"
+      "assets/index-C5W7torH.css"
     ]
   },
   "src/popup/index.html": {
-    "file": "assets/index.html-Bv7gG3oX.js",
+    "file": "assets/index.html-ot58Q-3f.js",
     "name": "index.html",
     "src": "src/popup/index.html",
     "isEntry": true,
     "imports": [
       "__plugin-vue_export-helper-KKkw3Lli.js",
-      "_storage-DyKUafBE.js",
-      "_match-C4wd3_Kx.js"
+      "_storage-BhOQnXRe.js",
+      "_match-DBrPD0DG.js"
     ],
     "css": [
-      "assets/index-Ccn9DElU.css"
+      "assets/index-CQrLf2Ni.css"
     ]
   }
 }

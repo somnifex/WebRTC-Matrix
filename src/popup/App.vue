@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import browser from 'webextension-polyfill';
-import { StorageManager, Rule, Settings } from '../utils/storage';
+import { StorageManager, Settings } from '../utils/storage';
 import { matchRule } from '../utils/match';
 
 const currentDomain = ref('');
@@ -48,7 +48,7 @@ const checkStatus = async () => {
     }
   } catch (e) {
     console.error('Failed to check status:', e);
-    error.value = 'Failed to load status.';
+    error.value = `Error: ${e instanceof Error ? e.message : String(e)}`;
   } finally {
     isLoading.value = false;
   }
