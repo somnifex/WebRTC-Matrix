@@ -1,14 +1,13 @@
 {
     "manifest_version": 3,
     "name": "WebRTC Matrix",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Cross-browser WebRTC permission manager with per-domain control and WebDAV sync.",
     "permissions": [
         "storage",
         "privacy",
         "tabs",
-        "activeTab",
-        "scripting"
+        "activeTab"
     ],
     "host_permissions": [
         "<all_urls>"
