@@ -1,8 +1,8 @@
 {
-  "../../../../@crx/manifest": {
-    "file": "assets/crx-manifest.js-CEZClGYP.js",
+  "../../@crx/manifest": {
+    "file": "assets/crx-manifest.js-BHL4n10B.js",
     "name": "crx-manifest.js",
-    "src": "../../../../@crx/manifest",
+    "src": "../../@crx/manifest",
     "isEntry": true
   },
   "__plugin-vue_export-helper-KKkw3Lli.js": {
@@ -42,7 +42,7 @@
     ]
   },
   "src/options/index.html": {
-    "file": "assets/index.html-DL0Udn6O.js",
+    "file": "assets/index.html-CtL_ssu7.js",
     "name": "index.html",
     "src": "src/options/index.html",
     "isEntry": true,
@@ -51,11 +51,11 @@
       "_storage-BhOQnXRe.js"
     ],
     "css": [
-      "assets/index-C5W7torH.css"
+      "assets/index-CEFGu_Hp.css"
     ]
   },
   "src/popup/index.html": {
-    "file": "assets/index.html-ot58Q-3f.js",
+    "file": "assets/index.html-CoS5OtvO.js",
     "name": "index.html",
     "src": "src/popup/index.html",
     "isEntry": true,
@@ -65,7 +65,7 @@
       "_match-DBrPD0DG.js"
     ],
     "css": [
-      "assets/index-CQrLf2Ni.css"
+      "assets/index-Bfe6-PQn.css"
     ]
   }
 }
